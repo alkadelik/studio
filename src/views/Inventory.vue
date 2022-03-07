@@ -118,6 +118,7 @@
         <!-- @close="closeProductViewDrawer()"  -->
         <!-- :clear_variants="clear_variants" -->
         <ProductView
+        v-if="currentProduct"
           @back="backToInventory()"
           @editProduct="editProduct($event)"
         />
@@ -233,10 +234,14 @@ export default {
       store: "getStore",
       email_verified: "getEmailStatus",
 
-      // currentProduct: "getProductToBeEditted",
+      currentProduct: "getProductToBeEditted",
       // unsavedChange: "getUnsavedChange",
     }),
   },
+  mounted() {
+        this.$store.commit(mutationTypes.SET_PRODUCT_TO_BE_EDITTED, null);
+
+  }
 };
 </script>
 

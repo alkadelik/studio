@@ -11,9 +11,9 @@ try {
 
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
-const Axios = axios.create({
-  timeout: 1000,
-});
+// const Axios = axios.create({
+//   timeout: 1000,
+// });
 
 export const apiLogin = (data) => {
   return axios({
@@ -154,7 +154,12 @@ export const saveMerchSettlement = (data) => {
 };
 
 export const signUp = (data) => {
-  return Axios.post(urls.signUpUrl, data)
+  console.log(urls.signUpUrl)
+  return axios({
+    method: "post",
+    url: urls.signUpUrl,
+    data,
+  })
  
 };
 
@@ -184,8 +189,15 @@ export const updateProduct = (data, id) => {
   });
 };
 
+export const deleteProduct = (id) => {
+  return axios({
+    method: "delete",
+    url: `${urls.deleteProductUrl}${id}/`,
+  });
+};
+
 export const updateStore = (data, id) => {
-  console.log(urls.updateStoreUrl)
+  // console.log(urls.updateStoreUrl)
   return axios({
     method: "patch",
     url: `${urls.updateStoreUrl}${id}/`,
