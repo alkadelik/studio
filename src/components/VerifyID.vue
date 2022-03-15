@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="rounded-xl pa-4">
+    <v-card class="rounded-xl pa-3">
       <h1 class="my-4 text-capitalize">verification</h1>
 
       <v-card-text>
@@ -13,11 +13,11 @@
             v-model="otp_1"
             outlined
             hide-details
-            type="number"
+            type="text"
+            maxLength="1"
             dense
             @keyup="nextDigit($event)"
             @paste="pasteOTP"
-            @focus="clearOTP"
           />
         </li>
         <li>
@@ -26,7 +26,8 @@
             v-model="otp_2"
             outlined
             hide-details
-            type="number"
+            type="text"
+            maxLength="1"
             dense
             @keyup="nextDigit($event)"
           />
@@ -37,7 +38,8 @@
             v-model="otp_3"
             outlined
             hide-details
-            type="number"
+            type="text"
+            maxLength="1"
             dense
             @keyup="nextDigit($event)"
           />
@@ -49,7 +51,8 @@
             v-model="otp_4"
             outlined
             hide-details
-            type="number"
+            type="text"
+            maxLength="1"
             dense
             @keyup="nextDigit($event)"
           />
@@ -60,7 +63,8 @@
             v-model="otp_5"
             outlined
             hide-details
-            type="number"
+            type="text"
+            maxLength="1"
             dense
             @keyup="nextDigit($event)"
           />
@@ -71,7 +75,8 @@
             v-model="otp_6"
             outlined
             hide-details
-            type="number"
+            type="text"
+            maxLength="1"
             dense
             @keyup="nextDigit($event)"
           />
@@ -83,7 +88,7 @@
         :primary="true"
         size="large"
         @onClick="clearOTP"
-        
+        :containerStyle="{ marginTop: '1rem' }"
       />
 
       <v-card-text>
@@ -130,7 +135,13 @@ export default {
     nextDigit(e) {
       if (this.otp.length < 5) {
         this.otp += e.key;
-        document.getElementById(`otp_${this.otp.length}`).disabled = true;
+
+        console.log(this.otp);
+        if (this.otp.length > 5) {
+          this.resolveOTP();
+        }
+
+        // document.getElementById(`otp_${this.otp.length}`).disabled = true;
         document.getElementById(`otp_${this.otp.length + 1}`).focus();
         // prevent from future focus/disable
         // except backspace conditions
@@ -162,7 +173,7 @@ export default {
     resolveOTP() {
       verifyEmailPhone(this.otp, this.store.email) // modify to use account email not store email
         .then((res) => {
-          console.log(res)
+          console.log(res);
           if (res.data.status == "Success") {
             this.otp = "";
             this.$store.commit(mutationTypes.EMAIL_VERIFIED, true);
