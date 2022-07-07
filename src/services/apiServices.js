@@ -116,8 +116,8 @@ export const fetchStore = () => {
     method: "get",
     url: `${urls.storeUrl}`,
   })
-    .then((res) => {
-      console.log(res.data)
+    .then(() => {
+      // console.log(res.data)
      
     })
     .catch(() => {
@@ -168,7 +168,7 @@ export const saveMerchSettlement = (data) => {
 };
 
 export const signUp = (data) => {
-  console.log(urls.signUpUrl)
+  // console.log(urls.signUpUrl)
   return axios({
     method: "post",
     url: urls.signUpUrl,

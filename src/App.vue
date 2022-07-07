@@ -1,6 +1,7 @@
 <template>
   <v-app id="app" class="mobileHide">
-    <div id="main-content">
+    <div :id="$route.path !== '/' ? 'main-content' : ''">
+
       <Snackbar
         v-if="show_alert"
         :message="message"
@@ -16,7 +17,7 @@
         @closeDialog="closeDialog()"
       />
 
-      <div class="mb-5">
+      <div class="" style="overflow: hidden; height: 100vh">
         <v-main>
           <router-view />
         </v-main>
@@ -67,6 +68,7 @@ export default {
   },
   mounted() {
     // console.log(this.logged_in);
+    // console.log(this.$route.path)
   },
   created() {
     let token = window.sessionStorage.getItem("leyyow_token");
@@ -77,7 +79,7 @@ export default {
     }
 
     EventBus.$on("get_variants", () => {
-      console.log("get variants activated from edit product");
+      // console.log("get variants activated from edit product");
     });
     EventBus.$on("open_alert", (type, message, action) => {
       // console.log("receiving emit")

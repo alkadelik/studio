@@ -142,8 +142,8 @@ export default {
 
                 // this.$store.commit(mutationTypes.SAVE_STORE, {...this.store, verified})
               })
-              .catch((err) => {
-                console.log(err);
+              .catch(() => {
+                // console.log(err);
               })
               .finally(() => {});
           });

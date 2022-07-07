@@ -283,8 +283,8 @@ export default {
       this.$emit("editProduct", this.variants);
     },
     deleteProduct(id) {
-      deleteProduct(id).then((res) => {
-        console.log(res);
+      deleteProduct(id).then(() => {
+        // console.log(res);
       });
     },
     toggleDisplay() {
